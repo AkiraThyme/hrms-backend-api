@@ -25,3 +25,8 @@ module.exports = ({ router }) => router
     auth(['user']),
     authController.getUser
   )
+
+  .get(
+    '/fetch/employee',
+    authController.fetchEmployeeId
+  )

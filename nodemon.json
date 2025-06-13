@@ -1,6 +1,9 @@
 {
   "watch": ["src"],
-  "ignore": ["src/**/*.test.ts", "node_modules"],
+  "ignore": [
+    "src/**/*.spec.js",
+    "node_modules"
+  ],
   "ext": "ts,mjs,js,json",
   "exec": "node src/app.js",
   "legacyWatch": true

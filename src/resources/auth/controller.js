@@ -27,7 +27,7 @@ module.exports = {
       const body = ctx.request.body
 
       const schema = Joi.object({
-        email: Joi.string().email().required(),
+        // email: Joi.string().email().required(),
         password: Joi.string().min(6).required(),
         employee_id: Joi.number().required()
       }).unknown()
@@ -80,6 +80,32 @@ module.exports = {
       ctx.body = response
     } catch (e) {
       console.error('Error in employeeRegister:', e)
+      ctx.throw(500, e)
+    }
+  },
+
+  async fetchEmployeeId (ctx) {
+    try {
+      let { email } = ctx.request.query
+
+      if (!email) {
+        ctx.status = 400
+        ctx.body = { status: 400, message: 'Email is required' }
+        return
+      }
+
+      // Decode the email twice to handle double encoding
+      email = decodeURIComponent(decodeURIComponent(email))
+
+      const response = await authService.getEmployeeIdByEmail({ email })
+
+      if (response.status && response.status !== 200) {
+        ctx.status = response.status
+      }
+
+      ctx.body = response
+    } catch (e) {
+      console.error('Error in fetchEmployeeId:', e)
       ctx.throw(500, e)
     }
   }

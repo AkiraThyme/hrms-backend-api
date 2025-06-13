@@ -81,7 +81,7 @@ module.exports = {
   },
 
   async checkEmail (email) {
-    return await knex(USERTABLE)
+    return await knex({ u: USERTABLE })
       .join({ e: EMPLOYEETABLE }, 'u.emp_id', 'e.id')
       .where('e.email', email)
       .limit(1)
@@ -103,5 +103,12 @@ module.exports = {
       .first()
 
     return employee
+  },
+
+  async getEmployeeByEmail (email) {
+    return await knex(EMPLOYEETABLE)
+      .select('id')
+      .where('email', email)
+      .first()
   }
 }

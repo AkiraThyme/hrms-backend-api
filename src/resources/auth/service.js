@@ -26,16 +26,6 @@ module.exports = {
         }
       }
 
-      // Check if the email already exists
-      const existEmail = await authHelper.checkEmail(email)
-
-      if (existEmail && existEmail.length > 0) {
-        return {
-          status: 422,
-          message: 'Email already exists'
-        }
-      }
-
       // Hash the password
       const hashPassword = await bcrypt.hash(password)
 
@@ -43,8 +33,8 @@ module.exports = {
       const [userId] = await trx(USERTABLE)
         .insert({
           emp_id: employee_id,
-          email,
-          password: hashPassword
+          password: hashPassword,
+          last_login: new Date()
         })
 
       await trx.commit()
@@ -66,10 +56,6 @@ module.exports = {
       const trxProvider = knex.transactionProvider()
       const trx = await trxProvider()
       const user = await authHelper.getUser({ email })
-      console.log('User found:', user)
-
-      console.log('Email:', email)
-      console.log('Password:', password)
 
       if (!user) {
         return {
@@ -87,15 +73,14 @@ module.exports = {
       }
 
       const sanitizedPasswordHash = user.password.trim()
-
-      const isValidPassword = await bcrypt.verify({
+      const isPasswordValid = await bcrypt.verify({
         password,
         hash: sanitizedPasswordHash
       })
 
-      if (!isValidPassword) {
+      if (!isPasswordValid) {
         return {
-          status: 422,
+          status: 401,
           message: 'Invalid password'
         }
       }
@@ -156,6 +141,28 @@ module.exports = {
     } catch (error) {
       console.error('Error in empregister:', error)
       trx.rollback()
+      throw error
+    }
+  },
+
+  async getEmployeeIdByEmail ({ email }) {
+    try {
+      const employee = await authHelper.getEmployeeByEmail(email)
+
+      if (!employee) {
+        return {
+          status: 404,
+          message: 'Employee not found'
+        }
+      }
+
+      return {
+        status: 200,
+        message: 'Employee found',
+        emp_id: employee.id
+      }
+    } catch (error) {
+      console.error('Error in getEmployeeIdByEmail:', error)
       throw error
     }
   }
