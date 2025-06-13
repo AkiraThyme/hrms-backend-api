@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 /**
   Store common functionalities in services here
@@ -84,5 +85,23 @@ module.exports = {
       .join({ e: EMPLOYEETABLE }, 'u.emp_id', 'e.id')
       .where('e.email', email)
       .limit(1)
+  },
+
+  async checkEmployee (email) {
+    const employee = await knex(EMPLOYEETABLE)
+      .select('*')
+      .where('email', email)
+      .first()
+
+    return employee
+  },
+
+  async checkEmployeeById (employee_id) {
+    const employee = await knex(EMPLOYEETABLE)
+      .select('*')
+      .where('id', employee_id)
+      .first()
+
+    return employee
   }
 }

@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\Jay\\Documents\\local\\B\\HRMS - API\\storage\\logs\\.d547bd4a9c1f13a41f734e3ec30d535ac4a125c8-audit.json",
+    "files": [
+        {
+            "date": 1749795215268,
+            "name": "C:\\Users\\Jay\\Documents\\local\\B\\HRMS - API\\storage\\logs\\http-2025-06-13.log",
+            "hash": "9f401dfb67bc5ff9cddf68e07e5790e0fdccee55f3da03131cdd86e9e432559e"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -17,6 +17,7 @@ module.exports = {
           id: 'u.id',
           fname: 'e.fname',
           lname: 'e.lname',
+          password: 'u.password',
           email: 'e.email',
           job_id: 'e.job_id',
           level_id: 'e.level_id',

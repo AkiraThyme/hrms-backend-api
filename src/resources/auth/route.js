@@ -7,12 +7,17 @@ module.exports = ({ router }) => router
 
   .post(
     '/login',
-    authController.login
+    authController.userLogin
   )
 
   .post(
     '/register',
-    authController.register
+    authController.userRegister
+  )
+
+  .post(
+    '/register/employee',
+    authController.employeeRegister
   )
 
   .get(
