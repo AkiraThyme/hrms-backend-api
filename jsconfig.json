@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "module": "commonjs",
+    "paths": {
+      "@utilities/*": ["./src/utilities/*"],
+      "@config/*": ["./src/config/*"],
+      "@bootstrap/*": ["./src/bootstrap/*"],
+      "@middleware/*": ["./src/middleware/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@resources/*": ["./src/resources/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
