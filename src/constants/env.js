@@ -18,7 +18,8 @@ module.exports = {
     HOST: env.DB_HOST,
     USER: env.DB_USER,
     PASS: env.DB_PASS,
-    NAME: env.DB_NAME
+    NAME: env.DB_NAME,
+    PORT: env.DB_PORT
   },
   REDIS: {
     HOST: env.REDIS_HOST,

@@ -9,11 +9,11 @@ module.exports = knex({
   client: env.DB.CLIENT || 'mysql',
 
   connection: {
-    host: env.DB.HOST || '127.0.0.1',
-    user: env.DB.USER || 'root',
-    password: env.DB.PASS || '',
-    database: env.DB.NAME || '',
-    port: env.DB.PORT || 3306,
+    host: env.DB.HOST,
+    user: env.DB.USER,
+    password: env.DB.PASS,
+    database: env.DB.NAME,
+    port: env.DB.PORT,
     charset: 'utf8mb4',
     collation: 'utf8mb4_unicode_ci',
     dateStrings: true,

@@ -21,7 +21,7 @@ module.exports = {
     }
 
     try {
-      const list = await knex('users')
+      const list = await knex('hrms_users as users')
         .metaQuery(query, fields)
         .modify(function () {
           if (isCount) {
