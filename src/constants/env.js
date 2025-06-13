@@ -7,6 +7,7 @@ module.exports = {
   NODE_ENV: env.NODE_ENV,
   CLUSTER_COUNT: env.CLUSTER_COUNT,
   APP: {
+    HOST: env.APP_HOST,
     SECRET_KEY: env.APP_SECRET_KEY,
     PORT: env.APP_PORT
   },
