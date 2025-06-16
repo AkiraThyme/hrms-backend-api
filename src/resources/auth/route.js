@@ -22,7 +22,7 @@ module.exports = ({ router }) => router
 
   .get(
     '/fetch',
-    auth(['user']),
+    auth(['ADMIN']),
     authController.getUser
   )
 

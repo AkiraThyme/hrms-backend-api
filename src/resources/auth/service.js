@@ -2,6 +2,8 @@
 /* eslint-disable no-unused-vars */
 const knex = require('@config/knex')
 const authHelper = require('@resources/auth/helpers')
+const jwt = require('@utilities/jwt')
+const moment = require('@utilities/moment')
 
 const _get = require('lodash/get')
 const _first = require('lodash/first')
@@ -85,13 +87,37 @@ module.exports = {
         }
       }
 
+      console.log('User found:', user)
+
+      if (!user.emp_id || !user.name || !user.role) {
+        console.error('Error: Missing required fields in user object', user)
+        return {
+          status: 500,
+          message: 'Server error: Missing required fields in user object'
+        }
+      }
+
+      const token = await jwt.sign(user)
+
+      const lastLogin = moment().format('YYYY-MM-DD HH:mm:ss')
+      await trx(USERTABLE)
+        .where('emp_id', user.emp_id)
+        .update({
+          last_login: new Date(),
+          access_token: token
+        })
+
+      user.last_login = lastLogin
+      user.token = token
+
       await trx.commit()
       return {
         status: 200,
-        message: 'Login successful'
+        message: 'Login successful',
+        user
       }
     } catch (error) {
-      console.log(error)
+      console.log(555, error)
       throw error
     }
   },

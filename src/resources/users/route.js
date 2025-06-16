@@ -24,7 +24,7 @@ module.exports = ({ router }) => router
 
   .patch(
     '/',
-    auth(['user']),
+    auth(['EMPLOYEE', 'ADMIN']),
     usersController.patch
   )
 

@@ -19,7 +19,8 @@ module.exports = {
       .select({
         id: 'u.id',
         email: 'e.email',
-        name: 'u.name',
+        emp_id: 'u.emp_id',
+        name: 'e.fname',
         password: 'u.password',
         role: 'u.role'
       })
