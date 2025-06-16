@@ -13,8 +13,6 @@ const { userAgent } = require('koa-useragent')
 // const path = require('path')
 const _get = require('lodash/get')
 
-global.ReadableStream = require('web-streams-polyfill').ReadableStream
-
 // middlewares
 const koaStatic = require('@middleware/koa-static')
 
